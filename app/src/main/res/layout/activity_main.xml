@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.harvey.mvvmsample.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity">
+
+        <EditText
+            android:id="@+id/etInput"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@={viewModel.input}"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/tvOutput"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="@{viewModel.output}"
+            android:layout_marginTop="150dp"/>
+
+        <Button
+            android:id="@+id/btnRequest"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="250dp"
+            android:onClick="@{()->viewModel.request()}"
+            android:text="request"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
