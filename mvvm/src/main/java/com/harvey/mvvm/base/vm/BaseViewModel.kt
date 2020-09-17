@@ -1,18 +1,14 @@
-package com.harvey.mvvmsample.base
+package com.harvey.mvvm.base.vm
 
 import android.app.Application
-import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import com.hb.dialog.dialog.LoadingDialog
 
 /**
  * Created by Harvey on 2020/9/11
  */
 open class BaseViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
     private val observableEvents = MutableLiveData<ViewModelEvent>()
-    private var loadingDialog: LoadingDialog? = null
 
     fun getViewModelEvents(): LiveData<ViewModelEvent> = observableEvents
 
@@ -27,11 +23,10 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * activity finish
      */
     fun finish() {
-        postViewModelEvent(object : ViewModelEvent() {
-            override fun handle(activity: AppCompatActivity) {
-                activity.finish()
-            }
-        })
+        val viewModelEvent = ViewModelEvent().apply {
+            event = FINISH_ACTIVITY
+        }
+        postViewModelEvent(viewModelEvent)
     }
 
     /**
@@ -45,44 +40,52 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
      * activity 跳转
      */
     fun startActivity(clz: Class<*>, bundle: Bundle?) {
-        postViewModelEvent(object : ViewModelEvent() {
-            override fun handle(activity: AppCompatActivity) {
-                val intent = Intent(activity, clz)
-                if (bundle != null) {
-                    intent.putExtras(bundle)
-                }
-                activity.startActivity(intent)
-            }
-        })
+        val viewModelEvent = ViewModelEvent().apply {
+            event = START_ACTIVITY
+            activity = clz
+            this.bundle = bundle
+        }
+        postViewModelEvent(viewModelEvent)
+    }
+
+    /**
+     * container activity 跳转
+     */
+    fun startContainerActivity(fragmentName: String?) {
+        startContainerActivity(fragmentName, null)
+    }
+
+    /**
+     * container activity 跳转
+     */
+    fun startContainerActivity(fragmentName: String?, bundle: Bundle?) {
+        val viewModelEvent = ViewModelEvent().apply {
+            event = START_CONTAINER_ACTIVITY
+            this.fragmentName = fragmentName
+            this.bundle = bundle
+        }
+        postViewModelEvent(viewModelEvent)
     }
 
     /**
      * 显示加载框
      */
     fun showLoading(tittle: String) {
-        postViewModelEvent(object : ViewModelEvent() {
-            override fun handle(activity: AppCompatActivity) {
-                if (loadingDialog == null) {
-                    loadingDialog = LoadingDialog(activity)
-                    loadingDialog?.setCancelable(false)
-                    loadingDialog?.setMessage(tittle)
-                }
-                loadingDialog?.show()
-            }
-        })
+        val viewModelEvent = ViewModelEvent().apply {
+            event = SHOW_LOADING_DIALOG
+            this.tittle = tittle
+        }
+        postViewModelEvent(viewModelEvent)
     }
 
     /**
      * 隐藏加载框
      */
     fun dismissDialog() {
-        postViewModelEvent(object : ViewModelEvent() {
-            override fun handle(activity: AppCompatActivity) {
-                if (loadingDialog != null) {
-                    loadingDialog?.hide()
-                }
-            }
-        })
+        val viewModelEvent = ViewModelEvent().apply {
+            event = DISMISS_LOADING_DIALOG
+        }
+        postViewModelEvent(viewModelEvent)
     }
 
     //----------------------------- 生命周期 ------------------------------
@@ -114,17 +117,4 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     fun onPause() {
     }
     //----------------------------- 生命周期 ------------------------------
-}
-
-/**
- * activity事件
- */
-abstract class ViewModelEvent {
-    var event = 0;
-    var handled: Boolean = false
-        private set
-
-    open fun handle(activity: AppCompatActivity) {
-        handled = true
-    }
 }

@@ -1,4 +1,4 @@
-package com.harvey.mvvmsample
+package com.harvey.mvvm
 
 import org.junit.Test
 

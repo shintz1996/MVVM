@@ -1,10 +1,10 @@
-package com.harvey.mvvmsample.viewmodel
+package com.harvey.mvvm.sample.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.viewModelScope
-import com.harvey.mvvmsample.base.BaseViewModel
-import com.harvey.mvvmsample.view.MainActivity
+import com.harvey.mvvm.base.vm.BaseViewModel
+import com.harvey.mvvm.sample.view.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,10 +20,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     fun login() {
         viewModelScope.launch {
-            showLoading("loading")
-            sortList()
-            // Modify UI
-            dismissDialog()
+//            showLoading("loading")
+//            sortList()
+//            // Modify UI
+//            dismissDialog()
             startActivity(MainActivity::class.java)
         }
     }

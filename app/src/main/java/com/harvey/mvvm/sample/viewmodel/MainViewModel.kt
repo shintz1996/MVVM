@@ -1,8 +1,9 @@
-package com.harvey.mvvmsample.viewmodel
+package com.harvey.mvvm.sample.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableField
-import com.harvey.mvvmsample.base.BaseViewModel
+import com.harvey.mvvm.base.vm.BaseViewModel
+import com.harvey.mvvm.sample.view.TestFragment
 
 /**
  * Created by Harvey on 2020/9/11
@@ -13,8 +14,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
 
     fun request() {
         output.set(input.get())
-//        showLoading("111")
-//        finish()
+        startContainerActivity(TestFragment::class.java.canonicalName)
     }
 
     override fun onCreate() {

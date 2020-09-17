@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.harvey.mvvm.sample.viewmodel.MainViewModel" />
+            type="com.harvey.mvvm.sample.viewmodel.TestViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

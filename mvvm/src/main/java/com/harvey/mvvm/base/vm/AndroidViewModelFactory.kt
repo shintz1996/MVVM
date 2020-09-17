@@ -1,4 +1,4 @@
-package com.harvey.mvvmsample.base
+package com.harvey.mvvm.base.vm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

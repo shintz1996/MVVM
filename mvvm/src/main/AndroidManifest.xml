@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.harvey.mvvmsample" />
+    package="com.harvey.mvvm" >
+
+    <application>
+        <activity android:name="com.harvey.mvvm.base.view.ContainerActivity" />
+    </application>
+</manifest>

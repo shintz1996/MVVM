@@ -1,11 +1,11 @@
-package com.harvey.mvvmsample.view
+package com.harvey.mvvm.sample.view
 
 import android.os.Bundle
-import com.harvey.mvvmsample.BR
-import com.harvey.mvvmsample.viewmodel.MainViewModel
-import com.harvey.mvvmsample.R
-import com.harvey.mvvmsample.base.BaseActivity
-import com.harvey.mvvmsample.databinding.ActivityMainBinding
+import com.harvey.mvvm.BR
+import com.harvey.mvvm.sample.viewmodel.MainViewModel
+import com.harvey.mvvm.R
+import com.harvey.mvvm.base.view.BaseActivity
+import com.harvey.mvvm.databinding.ActivityMainBinding
 
 /**
  * Created by Harvey on 2020/9/11
